@@ -1,8 +1,13 @@
 import { betterAuth } from "better-auth";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
 import { db } from "./mongodb";
+import { MongoClient } from "mongodb";
 
-// Social providers are only enabled when their keys exist in the environment.
+
+const client = new MongoClient(process.env.MONGODB_URI as string);
+const db = client.db("bazardor");
+
+
 const socialProviders = {
   ...(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET
     ? {
