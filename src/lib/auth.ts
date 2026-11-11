@@ -39,8 +39,8 @@
 
 
 import { betterAuth } from "better-auth";
-import { mongodbAdapter } from "better-auth/adapters/mongodb";
-import { db } from "./mongodb";
+import { mongodbAdapter } from "@better-auth/mongo-adapter";
+import { db, client } from "./mongodb";
 
 const socialProviders = {
   ...(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET
@@ -67,7 +67,7 @@ export const auth = betterAuth({
   "https://bazardor-five-indol.vercel.app",
 ],
 
-  database: mongodbAdapter(db),
+  database: mongodbAdapter(db, { client }),
 
   emailAndPassword: {
     enabled: true,
@@ -76,15 +76,3 @@ export const auth = betterAuth({
 
   socialProviders,
 });
-
-
-// export const auth = betterAuth({
-//   database: mongodbAdapter(db),
-
-//   emailAndPassword: {
-//     enabled: true,
-//     autoSignIn: false,
-//   },
-
-//   socialProviders,
-// });
