@@ -62,6 +62,11 @@ const socialProviders = {
 };
 
 export const auth = betterAuth({
+  trustedOrigins: [
+  "http://localhost:3000",
+  "https://bazardor-five-indol.vercel.app",
+],
+
   database: mongodbAdapter(db),
 
   emailAndPassword: {
@@ -71,3 +76,15 @@ export const auth = betterAuth({
 
   socialProviders,
 });
+
+
+// export const auth = betterAuth({
+//   database: mongodbAdapter(db),
+
+//   emailAndPassword: {
+//     enabled: true,
+//     autoSignIn: false,
+//   },
+
+//   socialProviders,
+// });
